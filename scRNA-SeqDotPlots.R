@@ -41,7 +41,7 @@ genes<-readxl::read_xlsx('NV2GenesFinZ.xlsx')
 
 #Download Excel files with a column geneID containing the NV2 gene model names 
 #from https://github.com/Genikhovich-Lab/Data-for-plots into your working directory.
-#Replace the FILENAME name below with an actual file name, e.g. "Plot1_IDs.xlsx":
+#Replace the FILENAME name below with an actual file name, e.g. "S1Plot_IDs.xlsx":
 excelgenes = read_excel('FILENAME.xlsx')
 mygenes = excelgenes$geneID #ignore the rest of the worksheet
 #index where these are
@@ -115,7 +115,7 @@ expr_long <- expr %>%
   ) %>%
   select(cell_id, sample_id, group, gene, expression)
 #Export the values. Replace the FILENAME name below with an actual file name, 
-#e.g. "Plot1_raw_expression.csv"
+#e.g. "S1Plot_raw_expression.csv"
 write.csv(expr_long, "FILENAME_raw_expression.csv", row.names = FALSE)
 
 
@@ -133,5 +133,5 @@ summary_stats <- expr_long %>%
     .groups = "drop"
   )
 #Export the values. Replace the FILENAME name below with an actual file name, 
-#e.g. "Plot1_summary_stats.csv"
+#e.g. "S1Plot_summary_stats.csv"
 write.csv(summary_stats, "FILENAME_summary_stats.csv", row.names = FALSE)
