@@ -77,7 +77,11 @@ gene_order <- rownames(avg_scaled)[gene_clust$order]
 # -----------------------------
 # Step 4: Plot DotPlot with clustered gene order
 # -----------------------------
-DotPlot(
+library(dplyr)
+library(tidyr)
+library(readr)
+
+dotPlotFigure <- DotPlot(
   data1,
   assay = "RNA",
   features = gene_order,
@@ -90,6 +94,16 @@ DotPlot(
   RotatedAxis() +
   coord_flip() +
   theme(legend.position = "bottom")
+
+renameTab <- read_tsv("geneID_newName.map")
+new_order <- renameTab$new_gene_name[match(gene_order, renameTab$gene_short_name)]
+
+dotPlotFigure@data <- dotPlotFigure@data %>% 
+                  left_join(renameTab, by=c("features.plot"="gene_short_name")) %>% 
+                  mutate(features.plot=new_gene_name) %>% 
+                  select(avg.exp,pct.exp,features.plot,id,avg.exp.scaled) %>%
+                  mutate(features.plot=factor(features.plot, levels=new_order))
+print(dotPlotFigure)
 
 
 # -----------------------------
