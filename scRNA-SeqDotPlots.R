@@ -1,5 +1,7 @@
 #################################
 # Here is an R script for exploring gene expression in the single cell dataset.
+# It works with older Seurat (v3/v4). If you use newer versions (v5), adjust the script accordingly, e.g. in Step 4,
+# replace dotPlotFigure@data with dotPlotFigure$data
 #################################
 # remove all the objects from the R session
 rm(list=ls()) 
